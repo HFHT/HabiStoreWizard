@@ -1,0 +1,27 @@
+.headlogo {
+    display: flex;
+    flex-direction: row;
+    margin: 4px 8px 0 8px;}
+
+.headlogo button {
+    padding: 0;
+}
+
+.headtitle {
+    display:inline;
+    font-size: unset;
+    line-height: 2.25rem;
+}
+.headtitle h1 {
+    margin: 5px;
+}
+.headbadges {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 319px) {
+    .headtitle h1 {
+        margin: 5px 0px;
+    }
+}
