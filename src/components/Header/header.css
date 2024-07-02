@@ -1,7 +1,10 @@
 .headlogo {
     display: flex;
     flex-direction: row;
-    margin: 4px 8px 0 8px;}
+    margin: 4px 8px 0 8px;
+    flex-shrink: 0;
+    fill: var(--color-icon);
+}
 
 .headlogo button {
     padding: 0;
@@ -18,6 +21,14 @@
 .headbadges {
     display: flex;
     flex-direction: row;
+}
+
+.iconmenu {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    flex-shrink: 0;
+    fill: var(--color-icon);
 }
 
 @media (max-width: 319px) {
