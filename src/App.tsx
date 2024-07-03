@@ -13,6 +13,7 @@ export function App() {
   return (
     <>
       <SpinnerModal isLoading={isAnalyzing} text={isAnalyzing ? 'Analyzing...' : ''} />
+      <p>Best image will "feature" the product, clearly show manufacturer and taken to hilight height, width, and depth.</p>
       <input value={imgUrl} onChange={(e: any) => setImgUrl(e.target.value)} title='Image URL' />
       <button onClick={doAnalyze}>Analyze</button>
       <ResponseEdit response={result}/>
