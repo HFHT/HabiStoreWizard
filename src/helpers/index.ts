@@ -11,4 +11,7 @@
 // export * from './buildFollowups';
 // export * from './fileHandler';
 // export * from './handleBrokenImage';
+export * from './barcode'
 export * from './fetch';
+export * from './file';
+export * from './img';

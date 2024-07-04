@@ -1,0 +1,45 @@
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-modal-bg: gray;
+    --color-modal-overlay: rgb(51, 65, 85);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-modal-bg: gray;
+    --color-modal-overlay: rgb(102, 103, 105);
+  }
+}
+
+.modal-overlay {
+  z-index: 9999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-modal-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  width: 96%;
+}
+
+.modal-box {
+  display: block;
+  background: var(--color-modal-bg);
+  width: 70%;
+  height: 70%;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 1rem;
+}
+
+.modal-close {
+  cursor: pointer;
+  background: var(--color-modal-bg);
+  position: absolute;
+  right: 28px;
+}
+

@@ -1,0 +1,38 @@
+.photogrid {
+    display: flex;
+  }
+
+  .photogrid .container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.photogrid .container .image {
+    width: 75px;
+    margin-right: 5px;
+    height: 75px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.photogrid .container .image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.photogrid .container .image span {
+    position: absolute;
+    top: -2px;
+    right: 9px;
+    font-size: 20px;
+    cursor: pointer;
+
+}
