@@ -22,6 +22,10 @@ export function App({ collections }: any) {
     analyze(imgUrl)
     // addProduct()
   }
+  const doClear = () => {
+    tweakResult(null)
+    setImages([])
+  }
   const saveProduct = (p: any) => {
     console.log(_product)
   }
@@ -35,7 +39,8 @@ export function App({ collections }: any) {
 
       <DragDropFile images={images} title='Product Photos' setImages={setImages} analyze={(e: any) => convertImageToBase64(e.url, (ee: any) => analyze(ee))} />
       {/* <PhotoGrid images={images} onClick={(e: any) => console.log(e)} /> */}
-      <ResponseEdit response={result} tweak={(e:any) => tweakResult(e)} setProduct={(e: any) => set_Product(e)} saveProduct={(e: any) => saveProduct(e)} />
+      <ResponseEdit response={result} tweak={(e: any) => tweakResult(e)} setProduct={(e: any) => set_Product(e)} saveProduct={(e: any) => saveProduct(e)} />
+      {images.length > 0 && <button onClick={doClear}>Clear</button>}
     </>
   )
 }
