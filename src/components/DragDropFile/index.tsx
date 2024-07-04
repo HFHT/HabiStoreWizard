@@ -129,7 +129,7 @@ export function DragDropFile({ images, setImages, title, analyze }: IDrag) {
                                 onClick={() => handleImgPop(image.url)} className='hover-zoom'
                             />
                             <div className='btns'>
-                                <div className='btn' onClick={() => chooseImage(idx)}>Analyze</div>
+                                <div className='btn button' onClick={() => chooseImage(idx)}>Analyze</div>
                             </div>
                         </div>
                     )

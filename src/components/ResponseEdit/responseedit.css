@@ -1,0 +1,24 @@
+.visionresponse textarea {
+    width: 95%;
+    height: 100%;
+}
+
+.visionresponse input {
+    width: 95%;
+}
+
+.visionresponse .price {
+    width: 3em;
+}
+
+.visionresponse .weight {
+    width: 3em;
+}
+
+.visionresponse .size {
+    width: 3em;
+}
+
+.visionresponse .mfg {
+    width: 20em;
+}

@@ -1,7 +1,9 @@
 .card {
     padding: 0 10px;
-    box-shadow: 0 0 5px #ffdfdf;
+    /* box-shadow: 0 0 5px #ffdfdf;
     border-radius: 5px;
+    border-style: solid;
+    border-width: thin; */
     overflow: hidden;
 
 }
@@ -17,15 +19,7 @@
 }
 
 .card button {
-    outline: none;
-    border: 0;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 400;
-    padding: 8px 13px;
-    width: 100%;
-    background: #0086fe;
+
 }
 
 .card .drag-area {
@@ -46,7 +40,7 @@
     font-size: 18px;
 }
 
-.card .select {
+/* .card .select {
     color: #5256ad;
     margin-left: 5px;
     cursor: pointer;
@@ -56,7 +50,7 @@
 .card .select {
     opacity: 0.6;
 
-}
+} */
 
 .card .container {
     width: 100%;
@@ -65,9 +59,12 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
-    max-height: 200px;
+    max-height: 180px;
     overflow-y: auto;
     margin-top: 10px;
+    border-style: dotted;
+    border-width: thin;
+    border-radius: 5px;
 }
 
 .card .container .image {
@@ -97,10 +94,7 @@
 }
 
 .card .container .btn {
-    border-style: solid;
-    border-width: thin;
-    border-radius: 5px;
-    padding: 0px 2px;
+    padding: 0.6em 1em;
     margin-top: 3px;
 }
 

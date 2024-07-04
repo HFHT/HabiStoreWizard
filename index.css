@@ -53,9 +53,9 @@ input::-webkit-outer-spin-button {
     --color-glyph-bg: darkred;
     --color-icon: rgb(168, 166, 166);
 
-    --color-input-text: white;
+    --color-input-text: rgb(236, 232, 232);
     --color-input-placeholder: rgb(156 163 175);
-    --color-input-bg: rgb(55 65 81);
+    --color-input-bg: rgb(62, 62, 63);
     --color-input-box-bg: rgb(55 65 81);
     --color-input-focus: rgb(59 130 246);
     --color-input-outline: rgb(59 130 246);
@@ -69,7 +69,7 @@ input::-webkit-outer-spin-button {
     --color-green-background: darkgreen;
     --color-dark-background: black;
     --color-blue-background: blue;
-    --color-home-background:rgb(177, 98, 8);
+    --color-home-background: rgb(177, 98, 8);
 
   }
 }
@@ -118,8 +118,8 @@ input::-webkit-outer-spin-button {
     --color-green-background: lightgreen;
     --color-blue-background: lightblue;
     --color-dark-background: lightgray;
-    --color-home-background:rgb(187, 147, 101);
-    
+    --color-home-background: rgb(187, 147, 101);
+
   }
 }
 
@@ -136,22 +136,28 @@ a:hover {
 body {
   margin: 0;
   padding: 0 10px 0 10px;
-  max-width: 500px;
+  /* max-width: 500px; */
   /* display: flex;
   place-items: center;
   min-width: 320px; */
   min-height: 100vh;
   background-color: var(--color-background);
   color: var(--color-text);
-  /* overflow-y: hidden; */
+  overflow-y: hidden;
 }
 
 textarea {
-  color: var(--color-textarea);
-  background-color: var(--color-textarea-background);
+  color: var(--color-input-text);
+  background-color: var(--color-input-bg);
   height: 4em;
   width: 22em;
   margin-top: 8px;
+}
+
+input {
+  color: var(--color-input-text);
+  background-color: var(--color-input-bg);
+  border-color: var(--color-input-border);
 }
 
 h1 {
@@ -169,8 +175,12 @@ h3 {
   line-height: 1.1;
 }
 
+p {
+  margin: 0;
+  padding: 0;
+}
 
-@media (max-width: 319px) {
+/* @media (max-width: 319px) {
   textarea {
     width: 19em;
   }
@@ -185,7 +195,7 @@ h3 {
   h3 {
     font-size: 1rem;
   }
-}
+} */
 
 
 img,
@@ -193,20 +203,30 @@ svg {
   vertical-align: middle;
 }
 
-button {
+button,
+.button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-btn-background);
   cursor: pointer;
   transition: border-color 0.25s;
+  line-height: 1em;
 }
 
-button:hover {
+button:hover,
+.button:hover {
   border-color: #646cff;
+  background-color: var(--color-btn-hover);
+}
+
+button:disabled,
+.button:disabled {
+  border-color: #646cff;
+  background-color: var(--color-btn-off-background);
 }
 
 button:focus,
@@ -242,4 +262,12 @@ button:focus-visible {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.flex { 
+  display: flex;
+}
+
+.justify-content {
+  justify-content: space-around;
 }

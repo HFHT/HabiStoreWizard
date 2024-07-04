@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { convertImageToBase64, fetchJson } from "../helpers";
-const VISIONPROMPT = 'Analyze the image. Generate a product title. Also generate a product description which includes the color and finish or fabric. Estimate the product weight in pounds, size in feet, and thrift store price in US dollars. Try to provide the manufacturer.  Categorize the product into one of the following:  Cabinet, Rug, Lighting, Art/Décor, Sporting Goods, Furniture, Appliance, Household, Tool, Electrical, Plumbing, Flooring, Door, Window, or Building Materials. For the Furniture and Appliance categories provide the most appropriate room from the following choices: Living Room, Dining Room, Kitchen, Laundry, Patio & Outdoor Living, Office, Heating & Cooling, Garage, or Household. Return response in JSON format: {title: string, description: string, category: string, room: string, weight: number, size: {height: number, width: number, depth: number}, manufacturer: string, price: number}'
+const VISIONPROMPT = 'Analyze the image. Generate a product title. Also generate a product description which includes the color and finish or fabric. Estimate the product weight in pounds, size in feet, and thrift store price in US dollars. Try to provide the manufacturer.  Categorize the product into one of the following:  Cabinet, Rug, Lighting, Art/Décor, Sporting Goods, Furniture, Appliance, Household, Tool, Electronics, Electrical, Plumbing, Flooring, Door, Window, or Building Materials. For the Furniture and Appliance categories provide the most appropriate room from the following choices: Living Room, Dining Room, Kitchen, Laundry, Patio & Outdoor Living, Office, Heating & Cooling, Garage, or Household. Return response in JSON format: {title: string, description: string, category: string, room: string, weight: number, size: {height: number, width: number, depth: number}, manufacturer: string, price: number}'
 export function useVision() {
     const [AIresponse, setAIresponse] = useState<null | {}>(null)
     const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -26,5 +26,5 @@ export function useVision() {
         setIsAnalyzing(false)
         setAIresponse(objRes)
     }
-    return [analyze, AIresponse, isAnalyzing] as const
+    return [analyze, AIresponse, setAIresponse, isAnalyzing] as const
 }

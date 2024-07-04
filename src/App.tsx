@@ -14,7 +14,7 @@ export function App({ collections }: any) {
 
   const [imgUrl, setImgUrl] = useState('')
   const [_product, set_Product] = useState()
-  const [analyze, result, isAnalyzing] = useVision()
+  const [analyze, result, tweakResult, isAnalyzing] = useVision()
   const [addProduct] = useShopify(collections)
   const [images, setImages] = useState<Iimgs>([])
 
@@ -29,13 +29,13 @@ export function App({ collections }: any) {
     <>
       <ToastContainer position="top-left" className='mytoast' autoClose={2100} hideProgressBar={true} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
       <SpinnerModal isLoading={isAnalyzing} text={isAnalyzing ? 'Analyzing...' : ''} />
-      <p>Best image will "feature" the product, clearly show manufacturer and taken to hilight height, width, and depth.</p>
-      <input value={imgUrl} onChange={(e: any) => setImgUrl(e.target.value)} title='Image URL' />
-      <button onClick={doAnalyze}>Analyze</button>
+      {/* <p>Best image will "feature" the product, clearly show manufacturer and taken to hilight height, width, and depth.</p> */}
+      {/* <input value={imgUrl} onChange={(e: any) => setImgUrl(e.target.value)} title='Image URL' />
+      <button onClick={doAnalyze}>Analyze</button> */}
 
       <DragDropFile images={images} title='Product Photos' setImages={setImages} analyze={(e: any) => convertImageToBase64(e.url, (ee: any) => analyze(ee))} />
       {/* <PhotoGrid images={images} onClick={(e: any) => console.log(e)} /> */}
-      <ResponseEdit response={result} setProduct={(e: any) => set_Product(e)} saveProduct={(e: any) => saveProduct(e)} />
+      <ResponseEdit response={result} tweak={(e:any) => tweakResult(e)} setProduct={(e: any) => set_Product(e)} saveProduct={(e: any) => saveProduct(e)} />
     </>
   )
 }
