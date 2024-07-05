@@ -9,5 +9,6 @@ export * from './ResponseEdit';
 
 // export * from './Input';
 // export * from './Tiles';
+export * from './Slider';
 export * from './SpinnerModal';
 // export * from './Select';

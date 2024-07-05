@@ -1,4 +1,4 @@
-// export * from './fetchAll';
+export * from './fetchAll';
 // export * from './fetchControls';
 // export * from './fetchDays';
 export * from './fetchJson';

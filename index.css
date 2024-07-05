@@ -151,13 +151,29 @@ textarea {
   background-color: var(--color-input-bg);
   height: 4em;
   width: 22em;
-  margin-top: 8px;
+  margin-top: 6px;
+  font-size: 1.2em;
 }
 
 input {
   color: var(--color-input-text);
   background-color: var(--color-input-bg);
   border-color: var(--color-input-border);
+  font-size: 1em;
+  line-height: 1.5em;
+  margin-top: 6px;
+
+}
+
+select {
+  font-size: 0.9em;
+  height: 2em;
+}
+
+hr {
+  height: 1px;
+  border: none;
+  background-color: var(--color-border);
 }
 
 h1 {
@@ -264,7 +280,7 @@ button:focus-visible {
   line-height: 2.25rem;
 }
 
-.flex { 
+.flex {
   display: flex;
 }
 

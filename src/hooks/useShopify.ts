@@ -1,44 +1,18 @@
-import { useState } from "react"
-import { fetchJson, uniqueBarCode } from "../helpers"
-import { currentDiscount } from "../helpers/shopify/currentDiscount";
+import { addImages, addProduct, uniqueBarCode } from "../helpers"
+import { Iimgs } from "../components";
+export function useShopify(collections: any, noSave = false) {
 
-export function useShopify(collections: any) {
+    const addThisProduct = async (responseFromAI: responseFromAIType | null, images: Iimgs) => {
+        if (responseFromAI === null) return
+        const thisHandle = uniqueBarCode()
+        const title = `${thisHandle.slice(-5)} ${responseFromAI.title}`
 
-    const headers = new Headers();
-    var url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
-
-    const [_handle, set_Handle] = useState<string | null>(null)
-    
-    const addProduct = async () => {
-        let thisHandle = uniqueBarCode()
-        let options = {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify({
-                method: "add",
-                product: JSON.stringify({
-                    "product": {
-                        handle: thisHandle,
-                        title: `${thisHandle.slice(-5)} Wizard Draft`,
-                        vendor: currentDiscount(),
-                        status: "draft"
-                    }
-                })
-            })
+        const addResponse = await addProduct(responseFromAI, title, thisHandle, collections, noSave)
+        if (addResponse && addResponse.hasOwnProperty('prodId') || noSave) {
+            const imageResponse = await addImages(images, title, addResponse ? addResponse.prodId : '', noSave)
+            console.log(imageResponse)
         }
-        try {
-            const response = await fetchJson(url, options)
-            console.log('addProduct-fetchJson', response)
-        }
-        catch (error) { console.log(error); alert('Shopif Add Product failed: ' + error); }
     }
 
-
-
-    const updateProduct = () => {
-
-    }
-
-    return [addProduct] as const
-
+    return [addThisProduct] as const
 }

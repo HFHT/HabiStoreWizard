@@ -1,5 +1,5 @@
 import { fileType, handleBrokenImage } from '../../helpers';
-import { CloseIcon } from '../../icons';
+import { CloseIcon, InfoIcon } from '../../icons';
 import { Modal, useModal } from '../Modal';
 import './dragdropfile.css';
 import { useState, useRef } from 'react';
@@ -23,6 +23,7 @@ interface IDrag {
 
 export function DragDropFile({ images, setImages, title, analyze }: IDrag) {
     const [isDragging, setIsDragging] = useState(false)
+    const [showInfo, setShowInfo] = useState(false)
     const fileInput = useRef(null)
     const [showImgPopup, setShowImgPopup] = useState('')
     const photoModal = useModal()
@@ -99,9 +100,10 @@ export function DragDropFile({ images, setImages, title, analyze }: IDrag) {
     }
     return (
         <div className="card">
-            <div className="top">
-                <p>{title}</p>
+            <div className="top flex ">
+                <div>{title}&nbsp;</div><div onClick={() => setShowInfo(!showInfo)}>{InfoIcon()}</div>
             </div>
+            {showInfo && <p>The best results are when the manufacturer logo/name is clear and the product is at an angle so it can estimate height, width, and depth.</p>}
             <div className="drag-area" onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop}>
                 {isDragging ?
                     (
