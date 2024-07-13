@@ -1,4 +1,5 @@
-import { Flex, Burger, Button, useMantineColorScheme, useComputedColorScheme, AppShell, Avatar } from '@mantine/core';
+import { Flex, Burger, Button, useMantineColorScheme, useComputedColorScheme, AppShell, Avatar, useMantineTheme } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 const Logo = () => {
   return (
@@ -18,8 +19,10 @@ const Logo = () => {
   )
 }
 export function Header({ toggle, opened }: any) {
-  const { setColorScheme } = useMantineColorScheme();
-  const computedColorScheme = useComputedColorScheme('light');
+  const { setColorScheme } = useMantineColorScheme()
+  const computedColorScheme = useComputedColorScheme('light')
+  const theme = useMantineTheme()
+  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`)
 
   const toggleColorScheme = () => {
     setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark');
@@ -30,7 +33,7 @@ export function Header({ toggle, opened }: any) {
       <Flex justify="space-between" align="center" style={{ padding: '10px 20px' }}>
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         <div><Logo /> Shopify Wizard</div>
-        <Button size="sm" variant="link" onClick={toggleColorScheme}>
+        <Button size={mobile ? "xs" : "sm"} variant="link" onClick={toggleColorScheme}>
           {computedColorScheme === 'dark' ? <IconSunFilled /> : <IconMoonFilled />}
         </Button>
       </Flex>

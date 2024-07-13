@@ -84,7 +84,6 @@ function sortData(
 
 export function TableSort({ data, selections, setSelections }: TableSortInterface) {
     console.log('TableSort', data)
-    const [selection, setSelection] = useState(['1']);
     const [search, setSearch] = useState('');
     const [sortedData, setSortedData] = useState<RowData[]>();
     const [sortBy, setSortBy] = useState<keyof RowData | null>(null);

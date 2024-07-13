@@ -1,8 +1,7 @@
 import { Carousel } from '@mantine/carousel';
-import { Button, Flex, Group, Image, Menu, useMantineTheme } from '@mantine/core';
+import { Image, Menu, Text, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconAi, IconPhotoX, IconRestore } from '@tabler/icons-react';
-import { useState } from 'react';
 
 interface ImageCarouselInterface {
     images: Iimg[]
@@ -11,17 +10,15 @@ interface ImageCarouselInterface {
 }
 export function ImageCarousel({ images, action, open }: ImageCarouselInterface) {
     const theme = useMantineTheme();
-    const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
-    // const [menuOpened, setMenuOpened] = useState(false)
+    const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`)
 
     if (!open) return
     const theSelection = (theAction: any) => {
-        // setMenuOpened(false)
         action(theAction)
     }
     const slides = images.map((image: Iimg, idx: number) => (
         <Carousel.Slide key={image.url}>
-            <Menu shadow="md" width={200} trigger="click" openDelay={100} closeDelay={0} closeOnItemClick /*opened={menuOpened} onChange={setMenuOpened}*/>
+            <Menu shadow="md" width={200} trigger="click" openDelay={100} closeDelay={0} closeOnItemClick >
                 <Menu.Target>
                     <Image src={image.url} />
                 </Menu.Target>
@@ -42,15 +39,17 @@ export function ImageCarousel({ images, action, open }: ImageCarouselInterface) 
                             Remove All
                         </Menu.Item>
                     </div>
-
                 </Menu.Dropdown>
             </Menu >
 
         </Carousel.Slide >
-    ));
+    ))
     return (
-        <Carousel slideSize={{ base: '50%', sm: '10%' }} align="start" slidesToScroll={mobile ? 1 : 2} slideGap={{ base: 'xl', sm: 2 }} controlsOffset="lg" controlSize={37} withIndicators>
-            {slides}
-        </Carousel>
+        <>
+            <Carousel slideSize={{ base: '50%', sm: '10%' }} align="start" slidesToScroll={mobile ? 1 : 2} slideGap={{ base: 'xl', sm: 2 }} controlsOffset="lg" controlSize={37} withIndicators>
+                {slides}
+            </Carousel>
+            <Text size='xs'>Click on an Image to Analyze or remove.</Text>
+        </>
     );
 }

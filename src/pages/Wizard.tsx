@@ -3,11 +3,13 @@ import { useShopify, useVision } from "../hooks"
 import { ResponseEdit } from "../components"
 import { convertImageToBase64 } from "../helpers"
 import { ImageCarousel } from "../components/ImageCarousel"
-import { Box, Button, Flex, LoadingOverlay } from "@mantine/core"
+import { Box, Button, Divider, Flex, LoadingOverlay, Text, useMantineTheme } from "@mantine/core"
 import InputImages from "../components/InputImages"
+import { useMediaQuery } from "@mantine/hooks"
 
 export function Wizard({ collections }: any) {
-    const [showInfo, setShowInfo] = useState(false)
+    const theme = useMantineTheme()
+    const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`)
     const [openForm, setOpenForm] = useState(false)
     const [addProduct, addTags, products, getProductList, isBusy] = useShopify(collections, false)
     const [_product, set_Product] = useState()
@@ -44,12 +46,11 @@ export function Wizard({ collections }: any) {
     return (
         <>
             <Flex gap="xs" justify="center" direction="row" wrap="nowrap">
-                <InputImages images={images} setImages={setImages} toggleInfo={() => setShowInfo(!showInfo)} />
-                <Button onClick={doClear} disabled={images.length > 0 && result ? false : true}>Clear</Button>
-                <Button onClick={doSave} disabled={images.length > 0 && result ? false : true}>Save</Button>
+                <InputImages images={images} setImages={setImages} />
+                <Button size={mobile ? "xs" : "sm"} onClick={doClear} disabled={images.length > 0 && result ? false : true}>Clear</Button>
+                <Button size={mobile ? "xs" : "sm"} onClick={doSave} disabled={images.length > 0 && result ? false : true}>Save</Button>
             </Flex>
-            {showInfo && <p>The best results are when the manufacturer logo/name is clear and the product is at an angle so it can estimate height, width, and depth.</p>}
-
+            <Divider my="xs" />
             <ImageCarousel images={images} open={images.length > 0} action={(e: any) => action(e)} />
             <Box pos='relative'>
                 <LoadingOverlay visible={isAnalyzing || isBusy} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
