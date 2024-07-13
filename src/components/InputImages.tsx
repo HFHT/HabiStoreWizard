@@ -26,7 +26,7 @@ export default function InputImages({ images, setImages, toggleInfo }: InputImag
     }
     return (
         <>
-            <FileButton onChange={setFiles} accept="image/*" multiple>
+            <FileButton onChange={setFiles} accept="image/*" multiple capture>
                 {(props) =>
                     <>
                         <Button {...props}>Upload Images</Button>
