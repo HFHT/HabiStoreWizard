@@ -1,7 +1,5 @@
 import { Button, FileButton, Group, HoverCard, Text } from "@mantine/core";
 import { IconInfoCircle } from "@tabler/icons-react";
-import { useState } from "react";
-import { Iimg } from ".";
 
 interface InputImagesInterface {
     images: Iimg[]

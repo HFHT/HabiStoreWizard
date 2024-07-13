@@ -1,6 +1,5 @@
 import { Flex, NativeSelect, NumberInput, Switch, Textarea, TextInput } from '@mantine/core';
 import { CONST_CATS, CONST_ROOMS } from '../../CONSTANTS';
-import { Slider } from '../Slider';
 import './responseedit.css';
 
 interface ResponseEditI {
