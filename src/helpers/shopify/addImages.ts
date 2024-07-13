@@ -1,5 +1,4 @@
-import { convertImageToBase64, fetchAll, fetchJson, prepareImage, uniqueBarCode } from "..";
-import { Iimg, Iimgs } from "../../components";
+import { convertImageToBase64, fetchJson, uniqueBarCode } from "..";
 
 export async function addImages(images: Iimgs, title: string, thisHandle: string, noSave: boolean) {
     const url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopifyImage`;

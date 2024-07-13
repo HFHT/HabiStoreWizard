@@ -1,59 +1,47 @@
+import '@mantine/core/styles.css';
+import '@mantine/carousel/styles.css';
+import '@mantine/notifications/styles.css';
+import { Notifications, notifications } from '@mantine/notifications';
 import './App.css';
-import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
-
-import { useOnline, useParams, useShopify, useVision } from './hooks';
-import { DragDropFile, Iimgs, ResponseEdit, SpinnerModal } from './components';
-import { PhotoGrid } from './components/PhotoGrid';
-import { convertImageToBase64 } from './helpers';
+import { useOnline, useParams } from './hooks';
+import { useDisclosure } from '@mantine/hooks';
+import { AppShell, Box, Flex, LoadingOverlay, Text } from '@mantine/core';
+import RouterSwitcher from './RouterSwitcher';
+import { Header, Navbar } from './components';
 
 export function App({ collections }: any) {
-  const isOnline = useOnline({ online: [handleOnline], offline: [handleOffline] });
-  const params = useParams(['nosave']) 
 
-  const [imgUrl, setImgUrl] = useState('')
-  const [_product, set_Product] = useState()
-  const [analyze, result, tweakResult, isAnalyzing] = useVision()
-  const [addProduct] = useShopify(collections, params.nosave)
-  const [images, setImages] = useState<Iimgs>([])
+  const isOnline = useOnline({
+    online: [() => { notifications.show({ color: 'green', title: '🛜 Network Restored', message: 'You are back online! ' }) }],
+    offline: [() => { notifications.show({ color: 'red', title: '❗ Network Error', message: 'Connection to the network has been lost! ' }) }]
+  });
+  const params = useParams(['nosave', 'noprint'])
 
-  const doAnalyze = () => {
-    analyze(imgUrl)
-  }
-  const doClear = () => {
-    tweakResult(null)
-    setImages([])
-  }
-  const doSave = () => {
-    addProduct(result, images)
-    doClear()
-  }
-  const saveProduct = (p: any) => {
-    console.log(_product)
-  }
+  const [opened, { toggle }] = useDisclosure();
+
   return (
-    <>
-      <ToastContainer position="top-left" className='mytoast' autoClose={2100} hideProgressBar={true} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
-      <SpinnerModal isLoading={isAnalyzing} text={isAnalyzing ? 'Analyzing...' : ''} />
-      {/* <p>Best image will "feature" the product, clearly show manufacturer and taken to hilight height, width, and depth.</p> */}
-      {/* <input value={imgUrl} onChange={(e: any) => setImgUrl(e.target.value)} title='Image URL' />
-      <button onClick={doAnalyze}>Analyze</button> */}
+    <div className="App" style={{ marginTop: '20px' }}>
+      <AppShell
+        header={{ height: 55 }}
+        navbar={{ width: 120, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+        padding="xs"
+      >
+        <Header toggle={toggle} opened={opened} />
+        <Navbar />
+        <AppShell.Main>
+          <Notifications position="top-right" />
+          <Box pos='relative'>
+            <LoadingOverlay visible={!isOnline} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} loaderProps={{ size: 'xl', color: 'pink', type: 'bars' }} />
+            <RouterSwitcher collections={collections} />
+          </Box>
+        </AppShell.Main>
+        <AppShell.Footer zIndex={opened ? 'auto' : 201}>
+          <Flex justify="center">
+            <Text size="xs">Copyright<span>&copy;</span> Habitat for Humanity Tucson 2024</Text>
+          </Flex>
+        </AppShell.Footer>
+      </AppShell>
+    </div>
+  );
 
-      <DragDropFile images={images} title='Product Photos' setImages={setImages} analyze={(e: any) => convertImageToBase64(e.url, (ee: any) => analyze(ee))} />
-      {/* <PhotoGrid images={images} onClick={(e: any) => console.log(e)} /> */}
-      <ResponseEdit response={result} tweak={(e: any) => tweakResult(e)} setProduct={(e: any) => set_Product(e)} saveProduct={(e: any) => saveProduct(e)} />
-      <div className='flex justify-content'>
-        {images.length > 0 && result && <button onClick={doSave}>Save</button>}
-        {images.length > 0 && <button onClick={doClear}>Clear</button>}
-      </div>
-    </>
-  )
 }
-function handleOnline() {
-  toast.info('You are back online.', { autoClose: 6000, position: 'top-center' })
-};
-
-function handleOffline() {
-  toast.error('Connection to the network has been lost. Application is now in READ ONLY mode!', { autoClose: 10000, position: 'top-center' })
-};

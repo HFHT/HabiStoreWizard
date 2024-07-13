@@ -10,7 +10,7 @@ export function prepareCollections(theCollections: any, responseFromAI: response
     var aryStringCol = ['newly-added-items'].concat(catStringAry).concat(roomStringAry).concat(applStringAry)
     const uniqueNames = [...new Set(aryStringCol)];                                         // remove duplicates
     console.log(uniqueNames)
-    var aryNumberCol = [theCollections[currentDiscount()]]
+    var aryNumberCol = [theCollections[currentDiscount().col]]
     responseFromAI.feature && aryNumberCol.push(theCollections['featured-items'])
     for (let i = 0; i < uniqueNames.length; i++) {
         theCollections[uniqueNames[i]] && aryNumberCol.push(theCollections[uniqueNames[i]]) // remove undefined matches

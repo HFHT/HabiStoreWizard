@@ -19,7 +19,7 @@ export async function addProduct(responseFromAI: responseFromAIType, title: stri
                     title: responseFromAI.guarantee ? `${title} ${GUARANTEE}` : title,
                     published_scope: 'global',
                     body_html: responseFromAI.description,
-                    vendor: currentDiscount(),
+                    vendor: currentDiscount().col,
                     product_type: adjustedCategory.product_type,
                     status: 'active',
                     tags: adjustedCategory.tags,

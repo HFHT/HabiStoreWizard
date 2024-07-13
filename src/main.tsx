@@ -2,7 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { App } from './App'
 import { PageLayout } from './components'
+import { createTheme, MantineProvider } from '@mantine/core';
+import { BrowserRouter } from 'react-router-dom';
+import '@mantine/core/styles.css';
 
+const theme = createTheme({
+  /** Put your mantine theme override here */
+  fontFamily: 'Montserrat, sans-serif',
+  defaultRadius: 'md',
+});
 const headers = new Headers
 async function getCollections() {
   const collections: any = {}
@@ -30,10 +38,12 @@ async function getCollections() {
 
     ReactDOM.createRoot(document.getElementById('root')!).render(
       <React.StrictMode>
-        <PageLayout>
-          <App collections={results}/>
-        </PageLayout>
-      </React.StrictMode>,
+        <MantineProvider theme={theme}>
+          <BrowserRouter>
+            <App collections={results} />
+          </BrowserRouter>
+        </MantineProvider>
+      </React.StrictMode>
     )
   }
   catch (e) {
