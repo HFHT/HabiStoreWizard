@@ -2,7 +2,7 @@ import { useState } from "react";
 import { dateAdjust, dateFormat, hangtagDocument } from "../helpers";
 import { useCloudPRNT, usePrinter, useShopify } from "../hooks";
 import { TableSort } from "../components";
-import { Box, Button, Flex, LoadingOverlay } from "@mantine/core";
+import { Box, Button, Flex, LoadingOverlay, Text } from "@mantine/core";
 import { IconSquareRoundedMinusFilled, IconSquareRoundedPlusFilled } from "@tabler/icons-react";
 
 interface PrintMenuInterface {
@@ -26,7 +26,7 @@ export function PrintMenu({ collections, doPrint = true }: PrintMenuInterface) {
                             {
                                 was: shopifyProduct.variants[0].compare_at_price,
                                 now: shopifyProduct.variants[0].price,
-                                item: shopifyProduct.title,
+                                item: shopifyProduct.handle.slice(-5),
                                 url: import.meta.env.VITE_STORAGEIMAGEURL,
                                 img: shopifyProduct.image.src
                             })
@@ -42,16 +42,16 @@ export function PrintMenu({ collections, doPrint = true }: PrintMenuInterface) {
     }
     return (
         <>
-            <Flex gap="xs" justify="center" >
-                <IconSquareRoundedMinusFilled onClick={() => setShowDate(dateAdjust({ date: showDate, adjust: -1, max: dateFormat(null) }))} />
-                <div>{showDate}</div>
-                <IconSquareRoundedPlusFilled onClick={() => setShowDate(dateAdjust({ date: showDate, adjust: 1, max: dateFormat(null) }))} />
+            <Flex gap="xs" justify="center" align="center">
+                <IconSquareRoundedMinusFilled size={38} onClick={() => setShowDate(dateAdjust({ date: showDate, adjust: -1, max: dateFormat(null) }))} />
+                <Text size={'xl'}>{showDate}</Text>
+                <IconSquareRoundedPlusFilled size={38} onClick={() => setShowDate(dateAdjust({ date: showDate, adjust: 1, max: dateFormat(null) }))} />
             </Flex>
             <Flex gap="xs" justify="center" direction="row" wrap="nowrap">
-                <Button onClick={() => printSelections('bc!')} disabled={false}>Barcode</Button>
-                <Button onClick={() => printSelections('ht!')} disabled={false}>Hangtag</Button>
-                <Button onClick={() => printSelections('bc! ht!')} disabled={false}>&nbsp;Both&nbsp;</Button>
-                <Button onClick={() => getProductList(showDate)} disabled={false}>Refresh</Button>
+                <Button className='buttontext' onClick={() => printSelections('bc!')} disabled={false}>Barcode</Button>
+                <Button className='buttontext' onClick={() => printSelections('ht!')} disabled={false}>Hangtag</Button>
+                <Button className='buttontext' onClick={() => printSelections('bc! ht!')} disabled={false}>&nbsp;Both&nbsp;</Button>
+                <Button className='buttontext' onClick={() => getProductList(showDate)} disabled={false}>Refresh</Button>
             </Flex>
             <Box pos='relative'>
                 <LoadingOverlay visible={isBusy} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />

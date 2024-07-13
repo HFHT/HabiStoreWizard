@@ -129,7 +129,7 @@ export function TableSort({ data, selections, setSelections }: TableSortInterfac
                 value={search}
                 onChange={handleSearchChange}
             />
-            <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="auto">
+            <Table horizontalSpacing="xs" verticalSpacing="xs" miw={700} layout="auto">
                 <Table.Tbody>
                     <Table.Tr>
                         <Table.Th />

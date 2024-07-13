@@ -196,24 +196,6 @@ p {
   padding: 0;
 }
 
-/* @media (max-width: 319px) {
-  textarea {
-    width: 19em;
-  }
-  h1 {
-    font-size: 1.4rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
-
-  h3 {
-    font-size: 1rem;
-  }
-} */
-
-
 img,
 svg {
   vertical-align: middle;

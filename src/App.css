@@ -1,0 +1,17 @@
+.padding0 {
+    padding: 6px;
+}
+
+.buttontext {
+    font-size: unset;
+}
+
+@media (max-width: 480px) {
+    .buttontext {
+        font-size: small;
+        padding-right: 10px;
+        padding-left: 10px;
+
+    }
+
+}
