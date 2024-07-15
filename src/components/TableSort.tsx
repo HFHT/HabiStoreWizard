@@ -54,18 +54,24 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
 }
 
 function filterData(data: RowData[], search: string) {
+    console.log('filterData', data, search, keys(data[0]))
     const query = search.toLowerCase().trim();
     return data.filter((item) =>
-        keys(data[0]).some((key) => item[key].toLowerCase().includes(query))
+        keys(data[0]).some((key) => searchableField(item[key]).includes(query))
     );
 }
-
+function searchableField(field: any) {
+    if (['number', 'string'].includes(typeof (field))) {
+        return field.toString().toLowerCase()
+    }
+    return ''
+}
 function sortData(
     data: RowData[],
     payload: { sortBy: keyof RowData | null; reversed: boolean; search: string }
 ) {
     const { sortBy } = payload;
-
+    console.log('sortData', data, payload)
     if (!sortBy) {
         return filterData(data, payload.search);
     }
@@ -89,8 +95,8 @@ export function TableSort({ data, selections, setSelections }: TableSortInterfac
     const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
     const [reverseSortDirection, setReverseSortDirection] = useState(false);
     const toggleRow = (id: string) =>
-        setSelections((current:any) =>
-            current.includes(id) ? current.filter((item:any) => item !== id) : [...current, id]
+        setSelections((current: any) =>
+            current.includes(id) ? current.filter((item: any) => item !== id) : [...current, id]
         );
     const setSorting = (field: keyof RowData) => {
         const reversed = field === sortBy ? !reverseSortDirection : false;

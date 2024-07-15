@@ -20,11 +20,11 @@ export function App({ collections }: any) {
   const [opened, { toggle }] = useDisclosure();
 
   return (
-    <div className="App" style={{ marginTop: '20px' }}>
+    <div className="App" >
       <AppShell
         header={{ height: 55 }}
         navbar={{ width: 120, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-        padding="xs"
+        padding="sm"
       >
         <Header toggle={toggle} opened={opened} />
         <Navbar />
