@@ -13,7 +13,7 @@ import {
     Checkbox,
     Flex,
 } from '@mantine/core';
-import { IconSelector, IconChevronDown, IconChevronUp, IconSearch, IconBarcode, IconTagFilled, IconChecklist, IconFileCheck } from '@tabler/icons-react';
+import { IconSelector, IconChevronDown, IconChevronUp, IconSearch, IconBarcode, IconTagFilled, IconChecklist, IconFileCheck, IconPhotoOff } from '@tabler/icons-react';
 import classes from './TableSort.module.css';
 
 interface RowData {
@@ -54,7 +54,7 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
 }
 
 function filterData(data: RowData[], search: string) {
-    console.log('filterData', data, search, keys(data[0]))
+    // console.log('filterData', data, search, keys(data[0]))
     const query = search.toLowerCase().trim();
     return data.filter((item) =>
         keys(data[0]).some((key) => searchableField(item[key]).includes(query))
@@ -116,7 +116,7 @@ export function TableSort({ data, selections, setSelections }: TableSortInterfac
                 <Checkbox checked={selections.includes(row.id)} onChange={() => toggleRow(row.id)} />
             </Table.Td>
             <Table.Td><Flex wrap='nowrap' >{(row.tags.search(/bc!/) > -1) && <IconBarcode />}{(row.tags.search(/ht!/) > -1) && <IconTagFilled />}</Flex></Table.Td>
-            <Table.Td><Avatar variant="default" radius="sm" size="lg" src={row.image.src} /></Table.Td>
+            <Table.Td><Avatar variant="default" radius="sm" size="lg" src={row.image.src ? row.image.src : null} ><IconPhotoOff /></Avatar></Table.Td>
             <Table.Td>{row.title}</Table.Td>
             <Table.Td>{row.created_at}</Table.Td>
             <Table.Td>{row.tags}</Table.Td>

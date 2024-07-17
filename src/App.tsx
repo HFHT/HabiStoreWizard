@@ -4,20 +4,21 @@ import '@mantine/notifications/styles.css';
 import { Notifications, notifications } from '@mantine/notifications';
 import './App.css';
 import { useOnline, useParams } from './hooks';
-import { useDisclosure } from '@mantine/hooks';
 import { AppShell, Box, Flex, LoadingOverlay, Text } from '@mantine/core';
 import RouterSwitcher from './RouterSwitcher';
 import { Header, Navbar } from './components';
+import { useBeforeUnload } from 'react-router-dom';
+import { useState } from 'react';
 
 export function App({ collections }: any) {
+  useBeforeUnload(() => { confirm('refreshing window') })
 
   const isOnline = useOnline({
     online: [() => { notifications.show({ color: 'green', title: '🛜 Network Restored', message: 'You are back online! ' }) }],
     offline: [() => { notifications.show({ color: 'red', title: '❗ Network Error', message: 'Connection to the network has been lost! ' }) }]
   });
   const params = useParams(['nosave', 'noprint'])
-
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, setOpened] = useState(false)
 
   return (
     <div className="App" >
@@ -26,8 +27,8 @@ export function App({ collections }: any) {
         navbar={{ width: 120, breakpoint: 'sm', collapsed: { mobile: !opened } }}
         padding="sm"
       >
-        <Header toggle={toggle} opened={opened} />
-        <Navbar />
+        <Header opened={opened} setOpened={(e: any) => setOpened(e)} />
+        <Navbar close={() => setOpened(false)}/>
         <AppShell.Main>
           <Notifications position="top-right" />
           <Box pos='relative'>

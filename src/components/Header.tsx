@@ -18,7 +18,7 @@ const Logo = () => {
     </svg>
   )
 }
-export function Header({ toggle, opened }: any) {
+export function Header({ setOpened, opened }: any) {
   const { setColorScheme } = useMantineColorScheme()
   const computedColorScheme = useComputedColorScheme('light')
   const theme = useMantineTheme()
@@ -31,7 +31,7 @@ export function Header({ toggle, opened }: any) {
   return (
     <AppShell.Header>
       <Flex justify="space-between" align="center" style={{ padding: '10px 20px' }}>
-        <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+        <Burger opened={opened} onClick={() => setOpened(!opened)} hiddenFrom="sm" size="sm" />
         <div><Logo /></div>
         <Text size='xl'>Shopify Wizard</Text>
         <Button size={mobile ? "xs" : "sm"} variant="link" onClick={toggleColorScheme}>
