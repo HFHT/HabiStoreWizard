@@ -116,7 +116,7 @@ export function TableSort({ data, selections, setSelections }: TableSortInterfac
                 <Checkbox checked={selections.includes(row.id)} onChange={() => toggleRow(row.id)} />
             </Table.Td>
             <Table.Td><Flex wrap='nowrap' >{(row.tags.search(/bc!/) > -1) && <IconBarcode />}{(row.tags.search(/ht!/) > -1) && <IconTagFilled />}</Flex></Table.Td>
-            <Table.Td><Avatar variant="default" radius="sm" size="lg" src={row.image.src ? row.image.src : null} ><IconPhotoOff /></Avatar></Table.Td>
+            <Table.Td><Avatar variant="default" radius="sm" size="lg" src={row.image !== null ? row.image.src : null} ><IconPhotoOff /></Avatar></Table.Td>
             <Table.Td>{row.title}</Table.Td>
             <Table.Td>{row.created_at}</Table.Td>
             <Table.Td>{row.tags}</Table.Td>
