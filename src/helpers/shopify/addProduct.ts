@@ -1,5 +1,5 @@
 import { adjustCategory, currentDiscount, prepareCollections } from "."
-import { fetchJson } from ".."
+import { fetchJson, numberOrValue } from ".."
 const GUARANTEE = '- 30 Day Guarantee !'
 export async function addProduct(responseFromAI: responseFromAIType, title: string, thisHandle: string, collections: any, noSave: boolean) {
     const url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
@@ -31,7 +31,7 @@ export async function addProduct(responseFromAI: responseFromAIType, title: stri
                         taxable: false,
                         inventory_management: 'shopify',
                         inventory_policy: 'deny',
-                        inventory_quantity: responseFromAI.qty,
+                        inventory_quantity: numberOrValue(responseFromAI.qty, 1),
                         weight_unit: 'lb',
                         weight: responseFromAI.weight
                     }]
