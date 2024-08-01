@@ -32,8 +32,8 @@ export const CONST_ROOMS_OBJ: any = {
     'Patio & Outdoor Living': ['patio-outdoor-living']
 }
 export const CONST_APPLIANCE_OBJ: any = {
-    'kitchen': ['kitchen-appliances'],
-    'laundry': ['laundy-appliances']
+    'Kitchen': ['kitchen-appliances'],
+    'Laundry': ['laundy-appliances']
 }
 
 export const CONST_TYPES_TAGS = [
@@ -65,7 +65,7 @@ export const CONST_TYPES_TAGS = [
 ]
 
 export const theHangtagDiscountDocument =
-'<html>\
+    '<html>\
 <head>\
     <title>Print</title>\
     <link rel="preconnect" href="https://fonts.googleapis.com">\

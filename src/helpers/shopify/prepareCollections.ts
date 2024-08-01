@@ -5,8 +5,8 @@ export function prepareCollections(theCollections: any, responseFromAI: response
     if (!theCollections) return []
     console.log(theCollections)
     const catStringAry = CONST_CATS_OBJ[responseFromAI.category]
-    const roomStringAry = CONST_ROOMS_OBJ[responseFromAI.room]
-    const applStringAry = responseFromAI.category === 'Appliance' ? CONST_APPLIANCE_OBJ[responseFromAI.category] : []
+    const roomStringAry = responseFromAI.category !== 'Appliance' ? CONST_ROOMS_OBJ[responseFromAI.room] : []
+    const applStringAry = responseFromAI.category === 'Appliance' ? CONST_APPLIANCE_OBJ[responseFromAI.room] : []
     var aryStringCol = ['newly-added-items'].concat(catStringAry).concat(roomStringAry).concat(applStringAry)
     const uniqueNames = [...new Set(aryStringCol)];                                         // remove duplicates
     console.log(uniqueNames)
@@ -15,7 +15,7 @@ export function prepareCollections(theCollections: any, responseFromAI: response
     for (let i = 0; i < uniqueNames.length; i++) {
         theCollections[uniqueNames[i]] && aryNumberCol.push(theCollections[uniqueNames[i]]) // remove undefined matches
     }
-    console.log(aryNumberCol)
+    console.log('prepareCollections-return', aryNumberCol)
     return aryNumberCol
 }
 

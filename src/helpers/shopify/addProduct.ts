@@ -6,7 +6,7 @@ export async function addProduct(responseFromAI: responseFromAIType, title: stri
     const headers = new Headers();
 
     const adjustedCategory: { product_type: string, tags: string[] } = adjustCategory(responseFromAI)
-    console.log('addProduct-adjustedCategory', adjustCategory)
+    console.log('addProduct-adjustedCategory', adjustedCategory)
     const options = {
         method: 'POST',
         headers: headers,
