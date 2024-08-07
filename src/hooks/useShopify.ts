@@ -27,7 +27,7 @@ export function useShopify(collections: any, noSave = false) {
     const getTheProductList = async (theDate: string) => {
         setIsBusy(true)
         const theProductList = await getProductList(theDate)
-        setProducts(theProductList.theList.data)
+        setProducts(theProductList.theList.data.sort((a: IShopifyProd, b: IShopifyProd) => (a.created_at > b.created_at ? -1 : 1)))
         setIsBusy(false)
     }
 

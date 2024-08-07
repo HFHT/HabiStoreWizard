@@ -27,7 +27,7 @@ export async function addProduct(responseFromAI: responseFromAIType, title: stri
                         barcode: thisHandle,
                         compare_at_price: responseFromAI.price.toFixed(2),
                         price: responseFromAI.price.toFixed(2),
-                        requires_shipping: true,
+                        requires_shipping: responseFromAI.deliver,
                         taxable: false,
                         inventory_management: 'shopify',
                         inventory_policy: 'deny',

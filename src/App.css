@@ -6,6 +6,11 @@
     font-size: unset;
 }
 
+.mantine-Switch-label {
+    padding-left: 4px;
+    font-size: small;
+}
+
 @media (max-width: 480px) {
     .buttontext {
         font-size: small;

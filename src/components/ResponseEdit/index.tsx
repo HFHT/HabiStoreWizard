@@ -1,6 +1,6 @@
 import { Flex, NativeSelect, NumberInput, Switch, Textarea, TextInput } from '@mantine/core';
 import { CONST_CATS, CONST_ROOMS } from '../../CONSTANTS';
-import './responseedit.css';
+// import './responseedit.css';
 
 interface ResponseEditI {
     response: responseFromAIType | null
@@ -15,7 +15,10 @@ export function ResponseEdit({ open, response, setProduct, saveProduct, tweak }:
     if (!open) return
     return (
         <>
-            <Flex gap="xs" justify="center" direction="row" wrap="nowrap">
+            <Flex gap="xs" justify="center" direction="row" wrap="nowrap" className='pad-below pad-above'>
+                <Switch checked={response?.deliver} label="Deliver" size="md" onLabel="YES" offLabel="NO"
+                    onChange={(e: any) => tweak({ ...response, deliver: !response?.deliver })}
+                />
                 <Switch checked={response?.feature} label="Feature" size="md" onLabel="YES" offLabel="NO"
                     onChange={(e: any) => tweak({ ...response, feature: !response?.feature })}
                 />
@@ -46,19 +49,19 @@ export function ResponseEdit({ open, response, setProduct, saveProduct, tweak }:
                     onChange={(e: any) => tweak({ ...response, qty: e })}
                 />
                 <NumberInput value={response?.weight} leftSection='lbs'
-                    onChange={(e: any) => {console.log(e);tweak({ ...response, weight: e })}}
+                    onChange={(e: any) => { console.log(e); tweak({ ...response, weight: e }) }}
                 />
             </Flex>
             <Flex >
                 <NumberInput value={response?.size.height} leftSection='H: '
-                    onChange={(e: any) => tweak({ ...response, size: {...response!.size, height: e } })}
+                    onChange={(e: any) => tweak({ ...response, size: { ...response!.size, height: e } })}
                 />
                 <NumberInput value={response?.size.width} leftSection='W: '
-                    onChange={(e: any) => tweak({ ...response, size: {...response!.size, width: e } })}
-                    />
+                    onChange={(e: any) => tweak({ ...response, size: { ...response!.size, width: e } })}
+                />
                 <NumberInput value={response?.size.depth} leftSection='D: '
-                    onChange={(e: any) => tweak({ ...response, size: {...response!.size, depth: e } })}
-                    />
+                    onChange={(e: any) => tweak({ ...response, size: { ...response!.size, depth: e } })}
+                />
             </Flex>
         </>
     )

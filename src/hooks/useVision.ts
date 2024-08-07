@@ -27,7 +27,7 @@ export function useVision() {
         setIsAnalyzing(false)
         objRes.price = objRes.price > 50 ? objRes.price + PRICE_ADJUST : objRes.price
         objRes.manufacturer = objRes.manufacturer === 'Unknown' ? '' : objRes.manufacturer
-        setAIresponse({ ...objRes, feature: false, guarantee: false, qty: 1 })
+        setAIresponse({ ...objRes, feature: false, guarantee: false, deliver: true, qty: 1 })
     }
     return [analyze, AIresponse, setAIresponse, isAnalyzing] as const
 }
