@@ -18,7 +18,7 @@ export async function addProduct(responseFromAI: responseFromAIType, title: stri
                     handle: thisHandle,
                     title: responseFromAI.guarantee ? `${title} ${GUARANTEE}` : title,
                     published_scope: 'global',
-                    body_html: responseFromAI.description,
+                    body_html: `${responseFromAI.description} ${responseFromAI.dimensions ? `Approximate Size: ${responseFromAI.size.height} x ${responseFromAI.size.width} x ${responseFromAI.size.depth}` : ''}`,
                     vendor: currentDiscount().col,
                     product_type: adjustedCategory.product_type,
                     status: 'active',

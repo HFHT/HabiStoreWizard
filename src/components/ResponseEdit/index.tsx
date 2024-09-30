@@ -25,6 +25,9 @@ export function ResponseEdit({ open, response, setProduct, saveProduct, tweak }:
                 <Switch checked={response?.guarantee} label="Guarantee" size="md" onLabel="YES" offLabel="NO"
                     onChange={(e: any) => tweak({ ...response, guarantee: !response?.guarantee })}
                 />
+                <Switch checked={response?.dimensions} label="Size" size="md" onLabel="YES" offLabel="NO"
+                    onChange={(e: any) => tweak({ ...response, dimensions: !response?.dimensions })}
+                />
             </Flex>
             <NativeSelect value={response?.category} data={CONST_CATS.map((tc: string, idx: number) => tc)}
                 onChange={(e: any) => tweak({ ...response, category: e.target.value })}

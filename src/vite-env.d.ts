@@ -17,6 +17,7 @@ type responseFromAIType = {
     feature: boolean
     guarantee: boolean
     deliver: boolean
+    dimensions: boolean
 }
 
 type Itype = {
