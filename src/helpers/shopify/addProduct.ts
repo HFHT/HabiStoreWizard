@@ -3,11 +3,12 @@ import { fetchJson, numberOrValue } from ".."
 const GUARANTEE = '- 30 Day Guarantee !'
 export async function addProduct(responseFromAI: responseFromAIType, title: string, thisHandle: string, collections: any, noSave: boolean) {
     const url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
+    const urlWizard = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTMongoAPI`;
     const headers = new Headers();
 
     const adjustedCategory: { product_type: string, tags: string[] } = adjustCategory(responseFromAI)
     console.log('addProduct-adjustedCategory', adjustedCategory)
-    const options = {
+    var options = {
         method: 'POST',
         headers: headers,
         body: JSON.stringify({
@@ -44,6 +45,32 @@ export async function addProduct(responseFromAI: responseFromAIType, title: stri
         if (noSave) return
         const response = await fetchJson(url, options)
         console.log('addProduct-fetchJson', response)
+
+        options = {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({
+                method: 'insertOne',
+                db: 'Habitat', collection: 'ShopifyWizard',
+                data: {
+                    handle: thisHandle,
+                    title: responseFromAI.guarantee ? `${title} ${GUARANTEE}` : title,
+                    vendor: currentDiscount().col,
+                    created_at: new Date(),
+                    sold_at: null,
+                    product_type: adjustedCategory.product_type,
+                    status: 'active',
+                    tags: adjustedCategory.tags,
+                    barcode: thisHandle,
+                    price: responseFromAI.price.toFixed(2),
+                    compare_at_price: responseFromAI.price.toFixed(2),
+                    inventory_quantity: numberOrValue(responseFromAI.qty, 1),
+                }
+            })
+        }
+
+        const wizardItems = await (fetchJson(urlWizard, options))
+        console.log('wizardItems', wizardItems)
         return response
     }
     catch (error) { console.log(error); alert('Shopif Add Product failed: ' + error); }
