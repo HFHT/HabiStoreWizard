@@ -1,6 +1,5 @@
-import { Flex, Burger, Button, Text, useMantineColorScheme, useComputedColorScheme, AppShell, Avatar, useMantineTheme } from '@mantine/core';
+import { Burger, Text, AppShell, useMantineTheme, Grid } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import { useContext } from 'react';
 import { HeaderContext } from '../context/HeaderContext';
 import icon from '../assets/HabiStoreWizard.png'
@@ -22,28 +21,24 @@ const Logo = () => {
   )
 }
 export function Header({ setOpened, opened }: any) {
-  const { setColorScheme } = useMantineColorScheme()
-  const computedColorScheme = useComputedColorScheme('light')
+
   const theme = useMantineTheme()
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`)
-  const { state, dispatch } = useContext(HeaderContext)
-
-  const toggleColorScheme = () => {
-    setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark');
-  };
+  const { state } = useContext(HeaderContext)
 
   return (
     <AppShell.Header>
-      <Flex justify="space-between" align="center" style={{ padding: '10px 20px' }}>
-        <Burger opened={opened} onClick={() => setOpened(!opened)} hiddenFrom="sm" size="sm" />
-        <div>{!mobile ? <Logo /> : <img src={icon} height='38px' alt='wizard icon' />} </div>
-        <Text size={mobile ? 'md' : 'xl'}>Shopify Wizard - {state.page}</Text>
-
-        {/* <Text size='xl'>{!mobile && `Shopify Wizard - `}{state.page}</Text> */}
-        <Button size={mobile ? "xs" : "sm"} variant="link" onClick={toggleColorScheme}>
-          {computedColorScheme === 'dark' ? <IconSunFilled /> : <IconMoonFilled />}
-        </Button>
-      </Flex>
+      <Grid align='center'>
+        <Grid.Col span={1} >
+          <Burger opened={opened} onClick={() => setOpened(!opened)} hiddenFrom="sm" size="sm" />
+        </Grid.Col>
+        <Grid.Col span={3}>
+          <div>{!mobile ? <Logo /> : <img src={icon} height='48px' alt='wizard icon' />} </div>
+        </Grid.Col>
+        <Grid.Col span={8}>
+          <Text size={mobile ? 'md' : 'xl'}>Shopify Wizard - {state.page}</Text>
+        </Grid.Col>
+      </Grid>
     </AppShell.Header>
-  );
-};
+  )
+}

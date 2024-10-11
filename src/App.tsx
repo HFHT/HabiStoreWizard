@@ -23,7 +23,7 @@ export function App({ collections }: any) {
   return (
     <div className="App" >
       <AppShell
-        header={{ height: 55 }}
+        header={{ height: 50 }}
         navbar={{ width: 120, breakpoint: 'sm', collapsed: { mobile: !opened } }}
         padding="sm"
       >
