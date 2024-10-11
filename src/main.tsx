@@ -4,6 +4,7 @@ import { App } from './App'
 import { createTheme, MantineProvider } from '@mantine/core';
 import { BrowserRouter } from 'react-router-dom';
 import '@mantine/core/styles.css';
+import { HeaderContextProvider } from './context/HeaderContext';
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -39,7 +40,9 @@ async function getCollections() {
       <React.StrictMode>
         <MantineProvider theme={theme}>
           <BrowserRouter>
-            <App collections={results} />
+            <HeaderContextProvider >
+              <App collections={results} />
+            </HeaderContextProvider>
           </BrowserRouter>
         </MantineProvider>
       </React.StrictMode>

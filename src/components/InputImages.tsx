@@ -5,8 +5,9 @@ import { IconInfoCircle } from "@tabler/icons-react";
 interface InputImagesInterface {
     images: Iimg[]
     setImages: Function
+    mode: 'item' | 'donation'
 }
-export default function InputImages({ images, setImages }: InputImagesInterface) {
+export default function InputImages({ images, setImages, mode }: InputImagesInterface) {
     const theme = useMantineTheme()
     const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`)
     const setFiles = (files: any) => {
@@ -31,7 +32,7 @@ export default function InputImages({ images, setImages }: InputImagesInterface)
             <FileButton onChange={setFiles} accept="image/*" multiple capture>
                 {(props) =>
                     <>
-                        <Button size={mobile ? "xs" : "sm"} {...props}>Upload Images</Button>
+                        <Button size={mobile ? "xs" : "sm"} {...props}>{mode === 'item' ? 'Upload Item Images' : 'Donation Images'}</Button>
                         <Group justify='center'>
                             <HoverCard width={310} shadow="md">
                                 <HoverCard.Target>

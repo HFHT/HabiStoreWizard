@@ -1,6 +1,9 @@
 import { Flex, Burger, Button, Text, useMantineColorScheme, useComputedColorScheme, AppShell, Avatar, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
+import { useContext } from 'react';
+import { HeaderContext } from '../context/HeaderContext';
+import icon from '../assets/HabiStoreWizard.png'
 const Logo = () => {
   return (
     <svg version="1.1" viewBox="0 0 4822 983" width="80" height="17" fill="fillCurrent">
@@ -23,6 +26,7 @@ export function Header({ setOpened, opened }: any) {
   const computedColorScheme = useComputedColorScheme('light')
   const theme = useMantineTheme()
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`)
+  const { state, dispatch } = useContext(HeaderContext)
 
   const toggleColorScheme = () => {
     setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark');
@@ -32,8 +36,10 @@ export function Header({ setOpened, opened }: any) {
     <AppShell.Header>
       <Flex justify="space-between" align="center" style={{ padding: '10px 20px' }}>
         <Burger opened={opened} onClick={() => setOpened(!opened)} hiddenFrom="sm" size="sm" />
-        <div><Logo /></div>
-        <Text size='xl'>Shopify Wizard</Text>
+        <div>{!mobile ? <Logo /> : <img src={icon} height='38px' alt='wizard icon' />} </div>
+        <Text size={mobile ? 'md' : 'xl'}>Shopify Wizard - {state.page}</Text>
+
+        {/* <Text size='xl'>{!mobile && `Shopify Wizard - `}{state.page}</Text> */}
         <Button size={mobile ? "xs" : "sm"} variant="link" onClick={toggleColorScheme}>
           {computedColorScheme === 'dark' ? <IconSunFilled /> : <IconMoonFilled />}
         </Button>
