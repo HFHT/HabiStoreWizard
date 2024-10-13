@@ -5,4 +5,6 @@ export * from './Modal';
 export * from './InputImages';
 export * from './NavBar';
 export * from './ResponseEdit';
+export * from './ShopifyCustomer'
+export * from './ShopifyPhone'
 export * from './TableSort';

@@ -7,7 +7,7 @@ const GROUPPROMPT = 'Analyze the image. Return a list of everything you see, exc
 const PRICE_ADJUST = -1
 export function useVision() {
     const [AIresponse, setAIresponse] = useState<null | responseFromAIType>(null)
-    const [AIresponseList, setAIresponseList] = useState<null | any[]>(null)
+    const [AIresponseList, setAIresponseList] = useState<null | string>(null)
 
     const [isAnalyzing, setIsAnalyzing] = useState(false)
 
@@ -20,7 +20,6 @@ export function useVision() {
                 img: imgUrl,
                 prompt: VISIONPROMPT
             })
-
         };
         setIsAnalyzing(true)
         setAIresponse(null)
@@ -34,6 +33,7 @@ export function useVision() {
         objRes.manufacturer = objRes.manufacturer === 'Unknown' ? '' : objRes.manufacturer
         setAIresponse({ ...objRes, feature: false, guarantee: false, deliver: true, dimensions: true, qty: 1 })
     }
+
     const analyzeGroup = async (imgUrl: string) => {
         const headers = new Headers()
         const optionsDesc = {
@@ -43,20 +43,21 @@ export function useVision() {
                 img: imgUrl,
                 prompt: GROUPPROMPT
             })
-
         };
         setIsAnalyzing(true)
         setAIresponseList(null)
         const res = await fetchJson(`${import.meta.env.VITE_OPENAI_VISION}/api/AnalyzeImage`, optionsDesc)
         console.log(res)
-
         const cleanedRes = res.choices[0].message.content.substring(res.choices[0].message.content.indexOf('['), res.choices[0].message.content.lastIndexOf(']') + 1)
         console.log(cleanedRes)
-
         const objRes = JSON.parse(cleanedRes)
         console.log(objRes)
-        setAIresponseList(objRes)
-
+        // setAIresponseList(objRes)  // old method of returning an array of items.
+        if (objRes.length > 0) {
+            setAIresponseList(objRes.reduce((list: string, item: any) => `${list}, ${item.quantity}-${item.item}`, '').slice(2))
+        } else {
+            setAIresponseList('')
+        }
         setIsAnalyzing(false)
     }
     return { analyze, analyzeGroup, AIresponse, setAIresponse, AIresponseList, setAIresponseList, isAnalyzing } as const

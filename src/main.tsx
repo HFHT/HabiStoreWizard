@@ -1,10 +1,16 @@
+import './assets/styles/generics.css'
+import './assets/styles/mantine.css'
+import './assets/styles/custom.css'
+import '@mantine/core/styles.css'
+import '@mantine/carousel/styles.css';
+import '@mantine/notifications/styles.css';
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { App } from './App'
 import { createTheme, MantineProvider } from '@mantine/core';
 import { BrowserRouter } from 'react-router-dom';
-import '@mantine/core/styles.css';
 import { HeaderContextProvider } from './context/HeaderContext';
+import(`//maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_APIKEY}&language=en&libraries=places&v=weekly`)
 
 const theme = createTheme({
   /** Put your mantine theme override here */

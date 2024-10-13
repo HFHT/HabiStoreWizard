@@ -1,0 +1,23 @@
+.mantine-TextInput-label,
+.mantine-NumberInput-label,
+.mantine-Textarea-label,
+.mantine-Textarea-description,
+.mantine-Autocomplete-label {
+    display: flex !important;
+}
+
+.mantine-TextInput-input,
+.mantine-Textarea-input,
+.mantine-Autocomplete-input {
+    padding-left: 0.4rem !important;
+    padding-right: 0.4rem !important;
+}
+
+.mantine-Checkbox-root {
+    margin-top: 8px;
+}
+
+.mantine-Switch-label {
+    padding-left: 4px;
+    font-size: small;
+}

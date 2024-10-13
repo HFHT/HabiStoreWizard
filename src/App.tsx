@@ -1,8 +1,4 @@
-import '@mantine/core/styles.css';
-import '@mantine/carousel/styles.css';
-import '@mantine/notifications/styles.css';
 import { Notifications, notifications } from '@mantine/notifications';
-import './App.css';
 import { useOnline, useParams } from './hooks';
 import { AppShell, Box, Flex, LoadingOverlay, Text } from '@mantine/core';
 import RouterSwitcher from './RouterSwitcher';

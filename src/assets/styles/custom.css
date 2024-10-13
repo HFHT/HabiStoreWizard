@@ -1,0 +1,23 @@
+.pickphoneinput {
+    margin-left: unset;
+    font-size: 0.9rem;
+    /* width: 90%; */
+    margin-top: 2px;
+}
+
+.pickphone {
+    margin-top: 0.8rem;
+}
+
+.special-label {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .buttontext {
+        font-size: small;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+}
