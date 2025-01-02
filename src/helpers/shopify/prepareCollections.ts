@@ -4,6 +4,7 @@ import { CONST_APPLIANCE_OBJ, CONST_CATS_OBJ, CONST_ROOMS_OBJ } from '../../CONS
 export function prepareCollections(theCollections: any, responseFromAI: responseFromAIType) {
     if (!theCollections) return []
     console.log(theCollections)
+    if (responseFromAI.product) return [theCollections['purchased-products']]
     const catStringAry = CONST_CATS_OBJ[responseFromAI.category]
     const roomStringAry = responseFromAI.category !== 'Appliance' ? CONST_ROOMS_OBJ[responseFromAI.room] : []
     const applStringAry = responseFromAI.category === 'Appliance' ? CONST_APPLIANCE_OBJ[responseFromAI.room] : []

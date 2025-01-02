@@ -6,6 +6,7 @@ const VISIONPROMPT = 'Analyze the image. Generate a product title. Also generate
 const GROUPPROMPT = 'Analyze the image. Return a list of all products you see (Exclude carts, people and animals) in JSON format: [{item: string, quantity: number}]'
 
 const PRICE_ADJUST = -1
+const AI_RESPONSE_EMPTY = { category: '', description: '', manufacturer: '', price: 0, room: '', title: '', weight: 0, size: { height: 0, width: 0, depth: 0 }, feature: false, product: false, guarantee: false, deliver: false, dimensions: false, qty: 1 }
 export function useVision() {
     const [AIresponse, setAIresponse] = useState<null | responseFromAIType>(null)
     const [AIresponseList, setAIresponseList] = useState<null | string>(null)
@@ -26,13 +27,19 @@ export function useVision() {
         setAIresponse(null)
         const res = await fetchJson(`${import.meta.env.VITE_OPENAI_VISION}/api/AnalyzeImage`, optionsDesc)
         const cleanedRes = res.choices[0].message.content.substring(res.choices[0].message.content.indexOf('{'), res.choices[0].message.content.lastIndexOf('}') + 1)
+        if (cleanedRes === '' || cleanedRes === null || cleanedRes === undefined) {
+            console.warn('useVision could not analyze image - ', res.choices[0].message.content)
+            setIsAnalyzing(false)
+            setAIresponse({ ...AI_RESPONSE_EMPTY })
+            return
+        }
         const objRes = JSON.parse(cleanedRes)
         console.log(cleanedRes)
         console.log(objRes)
         setIsAnalyzing(false)
         objRes.price = objRes.price > 50 ? objRes.price + PRICE_ADJUST : objRes.price
         objRes.manufacturer = objRes.manufacturer === 'Unknown' ? '' : objRes.manufacturer
-        setAIresponse({ ...objRes, feature: false, guarantee: false, deliver: true, dimensions: true, qty: 1 })
+        setAIresponse({ ...objRes, feature: false, product: false, guarantee: false, deliver: true, dimensions: true, qty: 1 })
     }
 
     const analyzeGroup = async (imgUrl: string) => {

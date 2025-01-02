@@ -16,6 +16,7 @@ type responseFromAIType = {
     qty: number
     feature: boolean
     guarantee: boolean
+    product: boolean
     deliver: boolean
     dimensions: boolean
 }

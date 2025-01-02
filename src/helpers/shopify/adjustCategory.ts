@@ -2,6 +2,9 @@ import { CONST_TYPES_TAGS } from "../../CONSTANTS"
 
 export function adjustCategory(responseFromAI: responseFromAIType) {
     console.log('adjustCategory', responseFromAI, CONST_TYPES_TAGS)
+    if (responseFromAI.product) {
+        return { product_type: 'purchased', tags: ['Purchased', 'vision'] }
+    }
     const filteredByCategory: any[] = CONST_TYPES_TAGS.filter((mapping: any) => mapping.cat === responseFromAI.category)
     const filteredByCategoryAndRoom: any[] = filteredByCategory.filter((mapping: any) => mapping.room === responseFromAI.room)
     console.log('adjustCategory', filteredByCategory, filteredByCategoryAndRoom)
