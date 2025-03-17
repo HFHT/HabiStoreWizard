@@ -3,7 +3,7 @@ import { fetchJson, numberOrValue } from "..";
 const GUARANTEE = '- 30 Day Guarantee !'
 export async function addProduct(responseFromAI: responseFromAIType, title: string, thisHandle: string, collections: any, noSave: boolean) {
     const url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
-    const urlWizard = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTMongoAPI`;
+    const urlWizard = `${import.meta.env.VITE_AZURE_API}/api/saveLog`;
     const headers = new Headers();
 
     const adjustedCategory: { product_type: string, tags: string[] } = adjustCategory(responseFromAI)

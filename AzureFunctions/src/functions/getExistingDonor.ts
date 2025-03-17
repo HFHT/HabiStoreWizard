@@ -8,7 +8,7 @@ export async function getExistingDonor(request: HttpRequest, context: Invocation
     const find = request.query.get('find')
     // const [kiosk, donor, err] = await getDonor(find, client)
     const [donor, err] = await getDonor(find, client)
-    client.close
+    await client.close()
     return { body: JSON.stringify({ ...donor, err: err }) };
 };
 

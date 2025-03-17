@@ -9,7 +9,7 @@ export async function saveDonation(request: HttpRequest, context: InvocationCont
     context.log('req', req)
     const [donor, err] = await saveDonor(req, client)
     context.log('donor', donor)
-    client.close
+    await client.close()
     return { body: JSON.stringify({ donor: { ...donor }, err: err }) };
 };
 

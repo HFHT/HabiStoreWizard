@@ -6,8 +6,9 @@ export function useShopify(collections: any, noSave = false) {
 
     const addThisProduct = async (responseFromAI: responseFromAIType | null, images: Iimgs) => {
         if (responseFromAI === null) return
+        console.log('addThisProduct', responseFromAI)
         const thisHandle = uniqueBarCode()
-        const title = `${thisHandle.slice(-5)} ${responseFromAI.title}`
+        const title = `${thisHandle.slice(-5)}${responseFromAI.deliver ? '' : '-ND'} ${responseFromAI.title}`
         setIsBusy(true)
         const addResponse = await addProduct(responseFromAI, title, thisHandle, collections, noSave)
         if (addResponse && addResponse.hasOwnProperty('prodId') || noSave) {
