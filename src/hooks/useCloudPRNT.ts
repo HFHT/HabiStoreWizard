@@ -18,12 +18,12 @@ export function useCloudPRNT(): any {
         const response = await headAlignment(CONST_STAR_ALIGN, 'calibrate')
 
     }
-    const doBarcodePrint = async (product:IShopifyProd, increment:number) => {
+    const doBarcodePrint = async (product: IShopifyProd, increment: number) => {
         // update webapi to return the count of total number of barcodes.
         const response = await printBarcode(product, increment)
     }
     useEffect(() => {
     }, [])
 
-    return [queueSize, doBarcodePrint, doEmpty, calibrate, alignment ] as const
+    return { queueSize, doBarcodePrint, doEmpty, calibrate, alignment } as const
 }

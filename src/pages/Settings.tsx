@@ -6,7 +6,7 @@ import { IconMoonFilled, IconSunFilled } from "@tabler/icons-react";
 export function Settings() {
   const theme = useMantineTheme()
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`)
-  const [doEmpty, calibrate, alignment] = useCloudPRNT()
+  const { doEmpty, calibrate, alignment } = useCloudPRNT()
   const { setColorScheme } = useMantineColorScheme()
   const computedColorScheme = useComputedColorScheme('light')
   const toggleColorScheme = () => {

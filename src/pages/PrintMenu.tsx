@@ -18,7 +18,7 @@ export function PrintMenu({ collections, doPrint = true }: PrintMenuInterface) {
     const [selections, setSelections] = useState(['1'])
     const print = usePrinter({ pause: doPrint })
     const [addProduct, addTags, products, getProductList, isBusy] = useShopify(collections, doPrint)
-    const [queueSize, doBarcodePrint, doEmpty, calibrate, alignment] = useCloudPRNT()
+    const { queueSize, doBarcodePrint, doEmpty, calibrate, alignment } = useCloudPRNT()
     const printSelections = (type: 'bc!' | 'ht!' | 'bc! ht!') => {
         selections.forEach((shopifyId: string, idx: number) => {
             if (shopifyId !== '1') {
